@@ -1,5 +1,4 @@
 from django.db import models
-
 class Product(models.Model):
     image = models.ImageField(upload_to='product_images/%Y/%m/%d')
     name = models.CharField(max_length=100)
