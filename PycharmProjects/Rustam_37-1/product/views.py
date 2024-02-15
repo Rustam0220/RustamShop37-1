@@ -3,7 +3,6 @@ from django.http import HttpResponse
 from datetime import datetime
 from product.models import Product
 
-
 def hello_view(request):
     return HttpResponse("Hello! It's my project")
 
@@ -25,7 +24,6 @@ def product_list_view(request):
         products = Product.objects.all()
         print(products)
         context = {'products': products}
-
 
         return render(
             request=request,
