@@ -1,7 +1,8 @@
 
 from django.contrib import admin
 from django.urls import path
-from product.views import hello_view, current_date_view, goodbye_view, main_view, product_list_view
+from product.views import hello_view, current_date_view, goodbye_view, main_view, product_list_view, \
+    product_detail_view, categories_list_view
 
 
 urlpatterns = [
@@ -11,4 +12,6 @@ urlpatterns = [
     path('goodbye/', goodbye_view, name='goodbye'),
     path('', main_view),
     path('products/', product_list_view),
+    path('products/<int:product_id>/', product_detail_view),
+    path('categories/', categories_list_view, name='categories_list')
 ]
