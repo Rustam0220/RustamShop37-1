@@ -1,5 +1,7 @@
 {% extends 'components/navbar.html' %}
 
+{% load static %}
+
 {% block content %}
 
 <h1 style="text-align: center;">
@@ -10,6 +12,6 @@
     Welcome to the children's store. Here you can choose the necessary products and toys for your children
 </p>
 
-<img src="https://genlogo.com/files/genlogo_rus/landings/titles/5/1628760690_1.png">
+<img src="{% static 'main_page.png' %}" width="700">
 
 {% endblock %}
