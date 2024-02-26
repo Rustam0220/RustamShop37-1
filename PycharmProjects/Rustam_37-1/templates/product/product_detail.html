@@ -36,6 +36,10 @@
         </p>
     {% endfor %}
 
-
+<form action="/products/{{ product.id }}/create_review/" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Create Review</button>
+</form>
 
 {% endblock %}
