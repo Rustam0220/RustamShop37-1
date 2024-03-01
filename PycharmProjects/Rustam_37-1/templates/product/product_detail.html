@@ -6,22 +6,21 @@
         Product detail
     </h1>
 
-<img src="/media/{{ product.image }}" class="card-img-top" alt="...">
+    <img src="/media/{{ product.image }}" class="card-img-top" alt="...">
 
-<h1>
-    {{ product.name }} {{ product.rate }}
-</h1>
-<p>
-    {{ product.description }}
-</p>
-<p>
-    {{ product.created_at }}
-</p>
+    <h1>
+        {{ product.name }} {{ product.rate }}
+    </h1>
+    <p>
+        {{ product.description }}
+    </p>
+    <p>
+        {{ product.created_at }}
+    </p>
 
-{% for category in product.categories.all %}
-    <a href="#" class="btn btn-secondary">#{{ category.name }}</a>
-{% endfor %}
-
+    {% for category in product.categories.all %}
+        <a href="#" class="btn btn-secondary">#{{ category.name }}</a>
+    {% endfor %}
 
     <h1>
         Reviews
@@ -36,10 +35,13 @@
         </p>
     {% endfor %}
 
-<form action="/products/{{ product.id }}/create_review/" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Create Review</button>
-</form>
+    <form action="{% url 'create_review' product.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Review</button>
+    </form>
+
+</body>
+</html>
 
 {% endblock %}

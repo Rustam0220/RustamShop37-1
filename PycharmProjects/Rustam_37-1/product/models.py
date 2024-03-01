@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=50)
@@ -8,6 +9,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_products', null=True, blank=False)
     image = models.ImageField(upload_to='product_images/%Y/%m/%d')
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -26,6 +28,7 @@ class Product(models.Model):
 
 
 class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_reviews', null=True, blank=False)
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
@@ -36,4 +39,4 @@ class Review(models.Model):
 
 
     def __str__(self):
-        return f'Review for {self.product.name}'
+        return f'Review for {self.product.name} by {self.user.username}'
