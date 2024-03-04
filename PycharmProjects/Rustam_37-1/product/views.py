@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import datetime
+from django.db.models import Q
 from product.models import Product
 from product.models import Category
 from product.forms import ProductForm, ReviewForm, CategoryForm
@@ -22,17 +23,55 @@ def main_view(request):
 
 def product_list_view(request):
     if request.method == 'GET':
+        search = request.GET.get('search')
+        category_id = request.GET.get('category')
+        sort = request.GET.get('sort')
+        page = request.GET.get('page', 1)
 
+        categories = Category.objects.all()
         products = Product.objects.all()
-        print(products)
-        context = {'products': products}
+        if search:
+            products = products.filter(
+                Q(name__icontains=search) |
+                Q(description__icontains=search)
+            )
+        if category_id:
+            products = products.filter(categories=category_id)
 
+        if sort == 'rate':
+            order = request.GET.get('order')
+            if order == 'asc':
+                products = products.order_by('rate')
+            else:
+                products = products.order_by('-rate')
+        elif sort == 'created_at':
+            order = request.GET.get('order')
+            if order == 'asc':
+                products = products.order_by('created_at')
+            else:
+                products = products.order_by('-created_at')
+
+
+        limit = 5
+        max_pages = products.count() / limit
+        if max_pages % 1 != 0:
+            max_pages = int(max_pages) + 1
+
+        pages = [i for i in range(1, int(max_pages) + 1)]
+
+        start = (int(page) - 1) * limit
+        end = start + limit
+
+        products = products[start:end]
+        context = {
+            'products': products, 'categories': categories,
+            "pages": pages
+        }
         return render(
             request=request,
             template_name='product/product_list.html',
             context=context
-            )
-
+        )
 
 
 def product_detail_view(request, product_id):
