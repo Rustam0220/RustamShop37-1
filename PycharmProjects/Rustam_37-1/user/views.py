@@ -1,5 +1,6 @@
 import random
 
+
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,7 +8,7 @@ from django.shortcuts import redirect, render
 from django.core.mail import send_mail
 
 
-from user.forms import RegisterForm, LoginForm, SMSCodeForm
+from user.forms import RegisterForm, LoginForm, SMSCodeForm, ProfileUpdateForm
 from user.models import Profile, SMSCode
 
 
@@ -106,3 +107,21 @@ def profile_view(request):
 def logout_view(request):
     logout(request)
     return redirect('main_view')
+
+
+@login_required
+def update_profile_view(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_view')
+    else:
+        form = ProfileUpdateForm(instance=profile)
+
+    return render(request, 'user/update_profile.html', {'form': form})
+
+

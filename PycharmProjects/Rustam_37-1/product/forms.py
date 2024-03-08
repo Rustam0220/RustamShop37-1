@@ -62,3 +62,8 @@ class CategoryForm(forms.ModelForm):
         labels = {
             'name': 'Категория'
         }
+
+class ProductEditForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'image', 'categories']

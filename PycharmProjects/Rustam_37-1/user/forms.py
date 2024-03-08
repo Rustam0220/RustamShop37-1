@@ -1,4 +1,5 @@
 from django import forms
+from user.models import Profile
 
 
 class RegisterForm(forms.Form):
@@ -28,3 +29,8 @@ class LoginForm(forms.Form):
 
 class SMSCodeForm(forms.Form):
     code = forms.CharField(max_length=4)
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['age', 'avatar', 'bio']

@@ -18,6 +18,10 @@
         {{ product.created_at }}
     </p>
 
+    {% if request.user == product.user %}
+    Update: <a href="{% url 'update_product' product.pk %}">Update</a>
+    {% endif %}
+
     {% for category in product.categories.all %}
         <a href="#" class="btn btn-secondary">#{{ category.name }}</a>
     {% endfor %}
