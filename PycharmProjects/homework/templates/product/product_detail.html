@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+</head>
+<body>
+
+<h1>Product detail</h1>
+    <div>
+        <h2>{{ product.name }}</h2>
+        <p>Price: {{ product.price }}</p>
+        <p>Quantity: {{ product.quantity }}</p>
+        <p>Weight: {{ product.weight }}</p>
+        <p>Description: {{ product.description }}</p>
+        <img src="{{ product.image.url }}" alt="{{ product.name }} Image" width="100">
+        <p>Created Time: {{ product.created }}</p>
+        <p>Updated Time: {{ product.updated }}</p>
+        <p>Is Available: {{ product.is_available }}</p>
+        <p>Argticul: {{ product.argticul }}</p>
+    </div>
+    <hr>
+</body>
+</html>

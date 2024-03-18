@@ -1,0 +1,37 @@
+{% extends 'components/navbar.html' %}
+
+{% block content %}
+
+<h1>
+    Profile
+</h1>
+
+<p>
+    Welcome, {{ user.username }}!
+</p>
+
+<img src="/media/{{ user.profile.avatar }}" alt="">
+
+<p>
+    {{ user.email }}
+</p>
+
+<p>
+    {{ user.first_name }} {{ user.last_name }} age: {{ user.profile.age }}
+</p>
+
+<p>
+    {{ user.profile.bio }}
+</p>
+
+<p>
+    <a href="/logout/">Logout</a>
+</p>
+
+
+<p>
+    <a href="{% url 'update_profile' %}">Update Profile</a>
+</p>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+venv/
+
+.idea/
+.pycharm/
+
+__pycache__/
+
+.env
+db.sqlite3
+
+static_files/
+media/

@@ -1,0 +1,52 @@
+{% extends 'components/navbar.html' %}
+
+{% block content %}
+<body>
+    <form action="" method="get">
+        <input type="text" name="search" placeholder="Search" value="{{ request.GET.search }}">
+        <input type="submit" value="Search">
+    </form>
+
+    {% for category in categories %}
+        <a href="?category={{ category.id }}" class="btn btn-secondary">#{{ category.name }}</a>
+    {% endfor %}
+
+    <h2>
+        Sort by
+    </h2>
+
+    <a href="?sort=created_at&order=asc" class="btn btn-secondary">Newest</a>
+    <a href="?sort=created_at&order=desc" class="btn btn-secondary">Oldest</a>
+    <a href="?sort=rate&order=asc" class="btn btn-secondary">Rate (asc)</a>
+    <a href="?sort=rate&order=desc" class="btn btn-secondary">Rate (desc)</a>
+
+    <h1>
+        Product list
+    </h1>
+
+    {% for product in products %}
+        <div class="card" style="width: 18rem;">
+            <img src="/media/{{ product.image }}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-name">{{ product.name }} {{ product.rate }}</h5>
+            <p class="card-text">{{ product.created_at }}</p>
+            {% for category in product.categories.all %}
+                <a href="#" class="btn btn-secondary">#{{ category.name }}</a>
+            {% endfor %}
+            <a href="/products/{{ product.id }}/" class="btn btn-primary">View</a>
+            </div>
+        </div>
+    {% endfor %}
+
+<h1>
+    Pages
+</h1>
+
+    {% for page in pages %}
+        <a href="?page={{ page }}" class="btn btn-secondary">{{ page }}</a>
+    {% endfor %}
+
+</body>
+</html>
+
+{% endblock %}
