@@ -24,7 +24,6 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = ['id', 'text', 'product']
 
-
 class ProductReviewSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True)
     average_rating = serializers.SerializerMethodField()

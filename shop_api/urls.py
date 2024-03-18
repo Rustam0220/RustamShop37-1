@@ -13,4 +13,3 @@ urlpatterns = [
     path('api/v1/reviews/<int:id>/', product_views.review_detail, name='review_detail'),
     path('api/v1/products/reviews/', product_views.product_reviews, name='product_reviews'),
 ]
-
