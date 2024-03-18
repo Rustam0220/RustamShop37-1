@@ -47,7 +47,6 @@ def review_list(request):
     serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data)
 
-
 @api_view(['GET'])
 def review_detail(request, id):
     try:
@@ -57,7 +56,6 @@ def review_detail(request, id):
 
     serializer = ReviewSerializer(review)
     return Response(serializer.data)
-
 
 @api_view(['GET'])
 def product_reviews(request):

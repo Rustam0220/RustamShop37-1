@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path
 from product import views as product_views
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/categories/', product_views.category_list, name='category_list'),
