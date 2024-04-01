@@ -1,14 +1,14 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from .models import UserProfile
 from .serializers import UserSerializer, UserProfileSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 
-@api_view(['POST'])
-def registration(request):
-    if request.method == 'POST':
+class Registration(APIView):
+    def post(self, request):
         user_serializer = UserSerializer(data=request.data)
         profile_serializer = UserProfileSerializer(data={})
 
@@ -29,9 +29,8 @@ class CustomAuthToken(ObtainAuthToken):
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
 
-@api_view(['POST'])
-def confirm_user(request):
-    if request.method == 'POST':
+class ConfirmUser(APIView):
+    def post(self, request):
         activation_code = request.data.get('activation_code')
         try:
             profile = UserProfile.objects.get(activation_code=activation_code)
